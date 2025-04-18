@@ -1,21 +1,21 @@
 use num_traits::{cast, Float};
 use crate::special::gamma_util::is_gamma_pole;
 
-pub(crate) fn r_gammasgn<Real>(x: Real) -> Real
-where Real: Float {
+pub(crate) fn r_gammasgn<Field>(x: Real) -> Real
+where Field: Float {
     if !x.is_finite() {
         return x;
     } 
     if is_gamma_pole(x) {
-        return Real::zero();
+        return Field::zero();
     }
     if x.is_sign_positive() {
-        return Real::one();
+        return Field::one();
     }
-    if cast::<Real, usize>(x.abs().floor()).unwrap() & 1 == 1 {
-        Real::one()
+    if cast::<Field, usize>(x.abs().floor()).unwrap() & 1 == 1 {
+        Field::one()
     } else {
-        -Real::one()
+        -Field::one()
     }
 }
 

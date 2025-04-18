@@ -1,21 +1,6 @@
 
 use crate::special::gamma::real_gamma_impl::*; 
 
-/// Gamma and related functions for both real and complex-valued valued arguments.
-///
-/// # Implementation Notes
-/// For most implementations, a few properties are exploited to simplify the approximations. Firstly, the reflection property is used to always translate the value to the positive real axis.
-/// $$
-/// \Gamma(-z)\Gamma(z) = -\frac{\pi}{z\sin(\pi z)}
-/// $$
-/// Additionally, the recursive nature of the Gamma function is often used to move the value into some desired region to then approximate.
-/// $$
-/// \Gamma(z+1) = z\Gamma(z)
-/// $$
-pub trait Gamma{
-
-}
-
 /// Gamma related functions which only make sense, or are only currently supported for real-valued arguments.
 pub trait RealGamma: Gamma {
     /// Sign of the [gamma] function.
@@ -45,31 +30,6 @@ pub trait RealGamma: Gamma {
 
 macro_rules! float_gamma_impl {
     ($($T: ty)*) => ($(
-        impl Gamma for $T {
-            //#[inline(always)]
-            //fn gamma(self) -> Self {
-                //r_gamma(self)
-            //}
-
-            //#[inline(always)]
-            //fn lgamma(self) -> Self {
-                //r_lgamma(self)
-            //}
-
-            //#[inline(always)]
-            //fn lngamma(self) -> Self {
-                //if self < 0.0 {
-                    //return Self::NAN;
-                //}
-                //self.lgamma()
-            //}
-
-            //#[inline(always)]
-            //fn rgamma(self) -> Self {
-                //r_rgamma(self)
-            //}
-        }
-
         impl RealGamma for $T {
             #[inline(always)]
             fn gammasgn(self) -> Self {
